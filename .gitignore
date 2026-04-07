@@ -1,0 +1,71 @@
+# Ignora logs do Docker
+docker-compose.override.yml
+*.log
+
+# Ignora logs do Nginx
+/var/log/nginx/
+
+# Ignora arquivos de certificação (certificados reais não devem ser versionados)
+*.pem
+*.crt
+*.key
+certs/*.pem
+certs/*.crt
+
+# Ignora arquivos de estado do container
+*.tmp
+*.swp
+*.swo
+*~
+
+# Ignora arquivos temporários
+*.cache
+.cache/
+
+# Ignora variáveis de ambiente sensíveis
+.env
+.env.local
+.env.*.local
+
+# Ignora arquivos de sistema e caches
+.DS_Store
+Thumbs.db
+.DS_Store-*/
+.DS_Store.nolists/
+
+# Ignora imagens Docker cacheadas
+*.tar.gz
+*.dockerfile
+
+# Ignora volumes persistentes do Docker
+.docker-volume-cache
+
+# Ignora estado do systemd (se aplicável)
+/tmp/session.*
+/run/systemd/journal/stderr
+
+# Ignora backups e temporários
+*.bak
+*.backup
+*.orig
+
+# Ignora arquivos de build
+*.o
+*.class
+
+# Ignora IDEs e editores
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Ignora arquivos de estado de instalação
+*.debpackage
+
+# Ignora cache do sistema
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+package-lock.json
+pnpm-lock.json
