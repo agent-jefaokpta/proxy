@@ -24,23 +24,19 @@ fi
 echo "🌐 Domínio: $DOMAIN"
 echo "📁 Caminho dos certificados: $CERT_PATH"
 
-# Gerar key e certificados manualmente (sem interatividade do Certbot)
+# Gerar key e certificados manualmente (modo webroot - não requer portas abertas)
 mkdir -p "$CERT_PATH/live"
+mkdir -p "$CERT_PATH/archive/openclaw.jpbx.com.br"
 
-echo "📝 Gerando certificados SSL (Let's Encrypt)..."
-
-# Obter certificado via Certbot
-if ! certbot certonly --standalone -d "$DOMAIN" --non-interactive --agree-tos --email "admin@openclaw.jpbx.com.br" --cert-name "$DOMAIN"; then
+# Obter certificado via Certbot com modo webroot
+echo "📝 Obtendo certificado SSL (Let's Encrypt) em modo webroot..."
+if ! certbot certonly --webroot -w "$CERT_PATH" -d "$DOMAIN" --non-interactive --agree-tos --email "jefaokpta66@gmail.com" --cert-name "$DOMAIN"; then
     echo "❌ Falha ao obter certificado."
     exit 1
 fi
 
-# Mover os certificados para o caminho correto
-echo "🔄 Movendo certificados para /opt/proxy/certs/..."
-mv /etc/letsencrypt/live/openclaw.jpbx.com.br/fullchain.pem "$CERT_PATH/"
-mv /etc/letsencrypt/live/openclaw.jpbx.com.br/privkey.pem "$CERT_PATH/"
-
 # Garantir permissões corretas
+echo "🔄 Garantindo permissões dos certificados..."
 chmod 644 "$CERT_PATH/fullchain.pem"
 chmod 600 "$CERT_PATH/privkey.pem"
 
